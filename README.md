@@ -4,6 +4,8 @@ English | [中文](README.zh.md)
 
 By 7DGroup · MIT · [Gitee](https://gitee.com/zuozewei/dsh-skill-7d-code-reviewer)
 
+Development tutorial (Chinese): [docs/plugin-development-tutorial.md](docs/plugin-development-tutorial.md) — build your own standalone dsh skill plugin step by step, using this repository as the reference sample.
+
 Installable composition bundle that contributes `7d-code-reviewer` to `ctx.skills`. The skill carries the 7DGroup template-driven code review instructions: a five-step review flow, severity grading into critical/medium/minor, a four-dimension scoring rubric, and a placeholder-driven HTML report template.
 
 ## Install from Gitee

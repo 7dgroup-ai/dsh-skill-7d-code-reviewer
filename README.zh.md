@@ -4,6 +4,8 @@
 
 作者 7DGroup · MIT · [Gitee 仓库](https://gitee.com/zuozewei/dsh-skill-7d-code-reviewer)
 
+开发实战教程：[docs/plugin-development-tutorial.md](docs/plugin-development-tutorial.md)——以本仓库为样例，从零构建你自己的独立仓库 dsh 技能插件。
+
 可安装的组合包（bundle），向 `ctx.skills` 贡献 `7d-code-reviewer`。该 skill 提供 7DGroup 模板驱动的代码审查指令：五步审查流程、严重/中等/轻微三级问题分级、四维度评分标准，以及纯占位符的 HTML 报告模板。
 
 ## 从 Gitee 安装
