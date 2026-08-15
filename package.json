@@ -28,6 +28,7 @@
     "build": "tsdown",
     "test": "vitest run"
   },
+  "author": "7DGroup",
   "license": "MIT",
   "engines": {
     "node": "^22.19.0 || >=24.0.0"
