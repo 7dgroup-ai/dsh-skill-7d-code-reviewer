@@ -1,0 +1,6 @@
+# This bundle's composition layer: mounted when a profile lists this bundle
+# (dsh plugin --profile <name> add <this package>). The row references this
+# package by name so Node module resolution finds the installed code.
+- insert:
+    - id: skill-7d-code-reviewer
+      name: '@deepseek-ai/dsh-skill-7d-code-reviewer'
