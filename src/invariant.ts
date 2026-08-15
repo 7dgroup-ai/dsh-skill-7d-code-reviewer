@@ -1,13 +1,13 @@
 /**
- * Package-owned invariant companion for `@deepseek-ai/dsh-skill-7d-code-reviewer`.
- * @module @deepseek-ai/dsh-skill-7d-code-reviewer/invariant
+ * Package-owned invariant companion for `@7dgroup/dsh-skill-7d-code-reviewer`.
+ * @module @7dgroup/dsh-skill-7d-code-reviewer/invariant
  */
 
 /* jscpd:ignore-start */
 import type { Context } from '@deepseek-ai/cordis'
 import type { InvariantInstaller } from '@deepseek-ai/dsh-invariants'
 
-const PACKAGE_NAME = '@deepseek-ai/dsh-skill-7d-code-reviewer'
+const PACKAGE_NAME = '@7dgroup/dsh-skill-7d-code-reviewer'
 
 /** Cordis companion plugin name. */
 export const name = 'skill-7d-code-reviewer-invariant'

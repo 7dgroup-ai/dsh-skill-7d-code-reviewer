@@ -3,7 +3,7 @@ import { fileURLToPath } from 'node:url'
 import { Context } from '@deepseek-ai/cordis'
 import { describe, expect, it } from 'vitest'
 import SkillRegistry from '@deepseek-ai/dsh-skill'
-import * as Skill7dCodeReviewer from '@deepseek-ai/dsh-skill-7d-code-reviewer'
+import * as Skill7dCodeReviewer from '@7dgroup/dsh-skill-7d-code-reviewer'
 
 describe('dsh-skill-7d-code-reviewer', () => {
   it('registers and disposes the bundled code review skill', async () => {

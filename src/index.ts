@@ -1,7 +1,7 @@
 /**
  * Bundled `7d-code-reviewer` skill provider.
  *
- * @module @deepseek-ai/dsh-skill-7d-code-reviewer
+ * @module @7dgroup/dsh-skill-7d-code-reviewer
  */
 
 import { readFile } from 'node:fs/promises'

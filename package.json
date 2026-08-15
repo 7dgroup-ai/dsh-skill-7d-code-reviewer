@@ -1,5 +1,5 @@
 {
-  "name": "@deepseek-ai/dsh-skill-7d-code-reviewer",
+  "name": "@7dgroup/dsh-skill-7d-code-reviewer",
   "description": "Installable composition bundle contributing the 7DGroup template-driven code review skill to DeepSeek Harness",
   "version": "0.1.0-rc.5",
   "publishConfig": {

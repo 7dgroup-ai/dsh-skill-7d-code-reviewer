@@ -1,4 +1,4 @@
-# @deepseek-ai/dsh-skill-7d-code-reviewer
+# @7dgroup/dsh-skill-7d-code-reviewer
 
 English | [中文](README.zh.md)
 
@@ -16,7 +16,7 @@ pnpm blocks a git dependency's build scripts until allowed, so the first `add` f
 
 ```yaml
 allowBuilds:
-  '@deepseek-ai/dsh-skill-7d-code-reviewer@git+...': true
+  '@7dgroup/dsh-skill-7d-code-reviewer@git+...': true
 ```
 
 Allowing a build means letting that package's code run on your machine at install time, outside any agent sandbox. Prefer pinning a commit (`github:<owner>/dsh-skill-7d-code-reviewer#<sha>`) so later pushes cannot silently change what runs.
@@ -26,7 +26,7 @@ Allowing a build means letting that package's code run on your machine at instal
 Two forms ship prebuilt code and need no allowance:
 
 ```sh
-dsh plugin --profile <name> add @deepseek-ai/dsh-skill-7d-code-reviewer        # npm (once published)
+dsh plugin --profile <name> add @7dgroup/dsh-skill-7d-code-reviewer        # npm (once published)
 dsh plugin --profile <name> add ./dsh-skill-7d-code-reviewer-0.1.0-rc.5.tgz    # tarball from pnpm pack
 ```
 

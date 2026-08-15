@@ -3,4 +3,4 @@
 # package by name so Node module resolution finds the installed code.
 - insert:
     - id: skill-7d-code-reviewer
-      name: '@deepseek-ai/dsh-skill-7d-code-reviewer'
+      name: '@7dgroup/dsh-skill-7d-code-reviewer'

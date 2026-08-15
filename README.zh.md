@@ -1,4 +1,4 @@
-# @deepseek-ai/dsh-skill-7d-code-reviewer
+# @7dgroup/dsh-skill-7d-code-reviewer
 
 [English](README.md) | 中文
 
@@ -16,7 +16,7 @@ pnpm 在得到显式允许前会拒绝运行 git 依赖的构建脚本，所以�
 
 ```yaml
 allowBuilds:
-  '@deepseek-ai/dsh-skill-7d-code-reviewer@git+...': true
+  '@7dgroup/dsh-skill-7d-code-reviewer@git+...': true
 ```
 
 允许构建意味着让该包的代码在安装时于你的机器上执行，且不在任何 agent 沙箱之内。建议锁定 commit（`github:<owner>/dsh-skill-7d-code-reviewer#<sha>`），让后续推送无法悄悄改变实际运行的内容。
@@ -26,7 +26,7 @@ allowBuilds:
 以下两种形式携带预构建代码，无需任何构建授权：
 
 ```sh
-dsh plugin --profile <name> add @deepseek-ai/dsh-skill-7d-code-reviewer        # npm（发布后）
+dsh plugin --profile <name> add @7dgroup/dsh-skill-7d-code-reviewer        # npm（发布后）
 dsh plugin --profile <name> add ./dsh-skill-7d-code-reviewer-0.1.0-rc.5.tgz    # pnpm pack 产出的 tarball
 ```
 
