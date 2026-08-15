@@ -33,8 +33,10 @@ allowBuilds:
 
 ```sh
 dsh plugin --profile <name> add @7dgroup/dsh-skill-7d-code-reviewer        # npm（发布后）
-dsh plugin --profile <name> add ./dsh-skill-7d-code-reviewer-0.1.0-rc.5.tgz    # pnpm pack 产出的 tarball
+dsh plugin --profile <name> add ./7dgroup-dsh-skill-7d-code-reviewer-0.1.0-rc.5.tgz    # pnpm pack 产出的 tarball
 ```
+
+本地执行 `pnpm build` 后 `pnpm pack --pack-destination <目录>` 即可产出 tarball；产物内容、tarball 安装验证、`link:` 本地迭代与发版清单见 [docs/packaging.md](docs/packaging.md)。
 
 ## 构建与测试
 

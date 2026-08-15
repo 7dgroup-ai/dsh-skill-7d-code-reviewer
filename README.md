@@ -33,8 +33,10 @@ Two forms ship prebuilt code and need no allowance:
 
 ```sh
 dsh plugin --profile <name> add @7dgroup/dsh-skill-7d-code-reviewer        # npm (once published)
-dsh plugin --profile <name> add ./dsh-skill-7d-code-reviewer-0.1.0-rc.5.tgz    # tarball from pnpm pack
+dsh plugin --profile <name> add ./7dgroup-dsh-skill-7d-code-reviewer-0.1.0-rc.5.tgz    # tarball from pnpm pack
 ```
+
+Build the tarball locally with `pnpm build` followed by `pnpm pack --pack-destination <dir>`. [docs/packaging.md](docs/packaging.md) (Chinese) covers the artifact contents, tarball install verification, local `link:` iteration, and the release checklist.
 
 ## Build and test
 

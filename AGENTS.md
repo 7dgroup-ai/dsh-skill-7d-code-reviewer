@@ -13,6 +13,7 @@
 - `lib/` —— tsdown 构建产物；已被 gitignore，由 `prepare`/`build` 生成。
 - `tests/skill-7d-code-reviewer.spec.ts` —— vitest 测试用例。
 - `docs/plugin-development-tutorial.md` —— 以本仓库为参考示例的中文插件开发实战教程；修改打包、注册或构建设置前应先阅读。
+- `docs/packaging.md` —— 本地打包与 tarball 安装指南（pnpm pack 产物内容、免授权安装、`link:` 本地迭代、发版清单）。
 - `.trae/rules/git-commit-message.md` —— 提交信息规范（强制遵守，见下方「提交规范」）。
 
 ## 常用命令
