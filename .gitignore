@@ -1,3 +1,7 @@
 lib/
 node_modules/
 *.tsbuildinfo
+.DS_Store
+.workbuddy/
+.zcode/
+overview.md
