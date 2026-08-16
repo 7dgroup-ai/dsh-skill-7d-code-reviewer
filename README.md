@@ -102,7 +102,17 @@ dsh-skill-7d-code-reviewer/
 
 Prerequisites: `dsh` CLI, Node `^22.19.0 || >=24.0.0`, pnpm 10+.
 
-### Install directly in dsh (recommended)
+### Install from within a dsh session (recommended)
+
+The most direct way — just ask the agent in any dsh conversation, and it runs the install for you:
+
+> 安装插件 @7dgroup/dsh-skill-7d-code-reviewer
+
+(Or in English: "Install the plugin @7dgroup/dsh-skill-7d-code-reviewer" — the agent executes the equivalent `dsh plugin` command through its session shell.)
+
+For a git install the agent will hit the same pnpm `allowBuilds` gate and print the exact key to add to the profile's `pnpm-workspace.yaml`; after you add it, ask the agent to retry and the skill is enabled.
+
+### Install directly in dsh (CLI)
 
 Run one command directly in dsh — the `github:` shorthand is the fastest way:
 
