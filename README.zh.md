@@ -15,7 +15,6 @@
 > 纯组合包挂载，零核心改动。安装即启用，移除 bundle 行即卸载。
 > 作者 7DGroup · MIT · [Gitee 仓库](https://gitee.com/zuozewei/dsh-skill-7d-code-reviewer)
 
-插件开发新手？先看[零基础入门指南](docs/dsh-plugin-guide-beginner.md)；想开发自己的 dsh 技能插件？跟着[插件开发实战教程](docs/plugin-development-tutorial.md)走——本仓库就是它的可运行样例。
 
 ## ✨ 核心能力
 
@@ -68,7 +67,7 @@ dsh plugin --profile <name> add @7dgroup/dsh-skill-7d-code-reviewer     # npm（
 dsh plugin --profile <name> add ./7dgroup-dsh-skill-7d-code-reviewer-0.1.0-rc.5.tgz   # pnpm pack 产出的 tarball
 ```
 
-本地执行 `pnpm build` 后 `pnpm pack --pack-destination <目录>` 即可产出 tarball；产物内容、tarball 安装验证、`link:` 本地迭代与发版清单见 [docs/packaging.md](docs/packaging.md)。
+本地执行 `pnpm build` 后 `pnpm pack --pack-destination <目录>` 即可产出 tarball；产物内含 `lib/`、`cordis.patch.yml`、`assets/` 与包元信息。
 
 ## 💡 使用方式
 
@@ -102,10 +101,6 @@ assets/7d-code-reviewer/
 
 | 主题 | 内容 |
 |---|---|
-| [plugin-development-tutorial.md](docs/plugin-development-tutorial.md) | 独立仓库 dsh 技能插件开发实战教程，以本仓库为可运行样例 |
-| [dsh-plugin-development-guide.md](docs/dsh-plugin-development-guide.md) | 真实插件进阶剖析：初始化、生命周期、provider、配置、构建、测试、分发 |
-| [dsh-plugin-guide-beginner.md](docs/dsh-plugin-guide-beginner.md) | 零基础入门指南：生活化类比讲解，插件导入与使用 |
-| [packaging.md](docs/packaging.md) | 本地打包、tarball 安装、`link:` 迭代与发版清单 |
 | [AGENTS.md](AGENTS.md) | 仓库用途、目录结构、构建打包规则与开发规范 |
 
 ## 🛠️ 开发
@@ -118,7 +113,7 @@ pnpm test    # vitest
 
 git 安装克隆本仓库时不含 `lib/`，随后运行 `prepare`（tsdown 读取专用配置）：只转译 `src/`，不用项目引用、不做类型检查，peer 依赖保持外部化。本仓库没有 lint 或类型检查脚本——构建只做转译（`dts: false`），类型错误只能在编辑器/IDE 中暴露。
 
-提交消息遵循 [`.trae/rules/git-commit-message.md`](.trae/rules/git-commit-message.md) 的中文规范：`【类型】简短描述` 标题，类型从【新增】【修复】【优化】【调整】【删除】【文档】【测试】【回滚】【合并】中选用。
+提交消息遵循简体中文规范：`【类型】简短描述` 标题（不超过 50 个字符、末尾不加标点），类型从【新增】【修复】【优化】【调整】【删除】【文档】【测试】【回滚】【合并】中选用；复杂改动在标题后空一行，用数字序号逐条补充详情。
 
 ## ⚠️ 已知限制
 

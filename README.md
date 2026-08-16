@@ -15,7 +15,6 @@
 > Pure composable bundle — zero core changes. Install to enable; remove the bundle row to uninstall.
 > Maintained by 7DGroup · MIT · [Gitee](https://gitee.com/zuozewei/dsh-skill-7d-code-reviewer)
 
-New to plugin development? Start with the [zero-basis guide](docs/dsh-plugin-guide-beginner.md); want to build your own dsh skill plugin? Follow the [development tutorial](docs/plugin-development-tutorial.md) — this repository is its runnable reference sample.
 
 ## ✨ Core Capabilities
 
@@ -68,7 +67,7 @@ dsh plugin --profile <name> add @7dgroup/dsh-skill-7d-code-reviewer     # npm (o
 dsh plugin --profile <name> add ./7dgroup-dsh-skill-7d-code-reviewer-0.1.0-rc.5.tgz   # tarball from pnpm pack
 ```
 
-Build the tarball locally with `pnpm build` followed by `pnpm pack --pack-destination <dir>`. [docs/packaging.md](docs/packaging.md) covers the artifact contents, tarball install verification, local `link:` iteration and the release checklist.
+Build the tarball locally with `pnpm build` followed by `pnpm pack --pack-destination <dir>`; the archive carries `lib/`, `cordis.patch.yml`, `assets/` and the package metadata.
 
 ## 💡 Usage
 
@@ -102,10 +101,6 @@ No executable scripts ship with the skill; the report template stays pure placeh
 
 | Topic | Content |
 |---|---|
-| [plugin-development-tutorial.md](docs/plugin-development-tutorial.md) | Build a standalone-repo dsh skill bundle from zero, using this repository as the runnable reference sample |
-| [dsh-plugin-development-guide.md](docs/dsh-plugin-development-guide.md) | Advanced walkthrough of the real plugin: init, lifecycle, provider, config, build, test, distribution |
-| [dsh-plugin-guide-beginner.md](docs/dsh-plugin-guide-beginner.md) | Zero-basis guide with everyday analogies; install, import and use the plugin |
-| [packaging.md](docs/packaging.md) | Local packaging, tarball install, `link:` iteration and release checklist |
 | [AGENTS.md](AGENTS.md) | Repo purpose, structure, build/packaging rules and development conventions |
 
 ## 🛠️ Development
@@ -118,7 +113,7 @@ pnpm test    # vitest
 
 The git install clones this repository without `lib/` and runs `prepare` (tsdown with the dedicated config): it transpiles `src/` only, without project references or type checking, keeping peer dependencies external. No lint or typecheck scripts are configured — the build is transpile-only (`dts: false`), so type errors surface in the editor/IDE.
 
-Commit messages follow the Simplified Chinese convention in [`.trae/rules/git-commit-message.md`](.trae/rules/git-commit-message.md): a `【类型】简短描述` title using one of the nine fixed type tags (【新增】【修复】【优化】【调整】【删除】【文档】【测试】【回滚】【合并】).
+Commit messages follow a Simplified Chinese convention: a `【类型】简短描述` title (at most 50 characters, no trailing punctuation) using one of the nine fixed type tags (【新增】【修复】【优化】【调整】【删除】【文档】【测试】【回滚】【合并】); complex changes list numbered detail lines after a blank line.
 
 ## ⚠️ Known Limitations
 
