@@ -15,7 +15,6 @@
 > Pure composable bundle — zero core changes. Install to enable; remove the bundle row to uninstall.
 > Maintained by 7DGroup · MIT · [Gitee](https://gitee.com/zuozewei/dsh-skill-7d-code-reviewer)
 
-
 ## ✨ Core Capabilities
 
 - **Template-driven mode** — separation of concerns: `SKILL.md` decides what to review and how severe it is, `templates/` only presents. The HTML report template is pure placeholders, all placeholders must be filled, and every dynamic value is HTML-escaped.
@@ -25,7 +24,7 @@
 - **Dual output** — a text summary for quick reading, plus a full HTML report saved as `code-review-report-{timestamp}.html`.
 - **Built-in knowledge base** — coding standards, security checklist (SQL injection, XSS, authentication/authorization, sensitive-data leaks) and worked review examples, loaded on demand instead of bloating the prompt.
 
-## 📸 Preview
+## 🖼️ Plugin Effect
 
 A sample HTML report generated from the pure-placeholder template (`templates/report-template.html`) during a review of a small Python module — severity badges, four-dimension scores and fix suggestions are all filled by the model:
 
