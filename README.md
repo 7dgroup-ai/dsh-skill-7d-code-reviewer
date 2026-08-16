@@ -13,7 +13,7 @@
 
 > A template-driven code review skill plugin for DeepSeek Harness: five-step review flow, critical/medium/minor severity grading, four-dimension scoring, and dual text + HTML report output.
 > Pure composable bundle — zero core changes. Install to enable; remove the bundle row to uninstall.
-> Maintained by 7DGroup · MIT · [Gitee](https://gitee.com/zuozewei/dsh-skill-7d-code-reviewer)
+> Maintained by 7DGroup · MIT · [GitHub](https://github.com/7dgroup-ai/dsh-skill-7d-code-reviewer)
 
 ## ✨ Core Capabilities
 
@@ -46,21 +46,21 @@ A sample HTML report generated from the pure-placeholder template (`templates/re
 
 Prerequisites: `dsh` CLI, Node `^22.19.0 || >=24.0.0`, pnpm 10+.
 
-### Install from Gitee (git)
+### Install from GitHub (git)
 
 `dsh plugin` appends the bundle to the profile's `dsh.profile.bundles`, and the bundle's own patch layer mounts the `skill-7d-code-reviewer` row over the base composition:
 
 ```sh
-dsh plugin --profile <name> add git+https://gitee.com/zuozewei/dsh-skill-7d-code-reviewer.git
+dsh plugin --profile <name> add git+https://github.com/7dgroup-ai/dsh-skill-7d-code-reviewer.git
 ```
 
-Any git spec pnpm understands works; if this repository is mirrored to GitHub, the `github:<owner>/dsh-skill-7d-code-reviewer` shorthand is equivalent.
+Any git spec pnpm understands works; the `github:7dgroup-ai/dsh-skill-7d-code-reviewer` shorthand is equivalent.
 
 pnpm blocks a git dependency's build scripts until explicitly allowed, so the first `add` fails. Copy the exact package key pnpm printed into the profile's `pnpm-workspace.yaml`, then re-run:
 
 ```yaml
 allowBuilds:
-  '@7dgroup/dsh-skill-7d-code-reviewer@git+https://gitee.com/zuozewei/dsh-skill-7d-code-reviewer.git#<sha>': true
+  '@7dgroup/dsh-skill-7d-code-reviewer@git+https://github.com/7dgroup-ai/dsh-skill-7d-code-reviewer.git#<sha>': true
 ```
 
 Allowing a build means letting that package's code run on your machine at install time, outside any agent sandbox. Prefer pinning a commit (`...#<sha>`) so later pushes cannot silently change what runs.

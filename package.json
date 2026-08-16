@@ -32,11 +32,11 @@
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "git+https://gitee.com/zuozewei/dsh-skill-7d-code-reviewer.git"
+    "url": "git+https://github.com/7dgroup-ai/dsh-skill-7d-code-reviewer.git"
   },
-  "homepage": "https://gitee.com/zuozewei/dsh-skill-7d-code-reviewer#readme",
+  "homepage": "https://github.com/7dgroup-ai/dsh-skill-7d-code-reviewer#readme",
   "bugs": {
-    "url": "https://gitee.com/zuozewei/dsh-skill-7d-code-reviewer/issues"
+    "url": "https://github.com/7dgroup-ai/dsh-skill-7d-code-reviewer/issues"
   },
   "engines": {
     "node": "^22.19.0 || >=24.0.0"

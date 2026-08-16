@@ -13,7 +13,7 @@
 
 > 模板驱动的 DSH 代码审查技能插件：五步审查流程、严重/中等/轻微三级问题分级、四维度评分标准，文本摘要与 HTML 报告双输出。
 > 纯组合包挂载，零核心改动。安装即启用，移除 bundle 行即卸载。
-> 作者 7DGroup · MIT · [Gitee 仓库](https://gitee.com/zuozewei/dsh-skill-7d-code-reviewer)
+> 作者 7DGroup · MIT · [GitHub 仓库](https://github.com/7dgroup-ai/dsh-skill-7d-code-reviewer)
 
 ## ✨ 核心能力
 
@@ -46,21 +46,21 @@
 
 前置条件：`dsh` CLI、Node `^22.19.0 || >=24.0.0`、pnpm 10+。
 
-### 从 Gitee 安装（git）
+### 从 GitHub 安装（git）
 
 `dsh plugin` 会把 bundle 追加进 profile 的 `dsh.profile.bundles`，本 bundle 自带的 patch 层在基础组合之上挂载 `skill-7d-code-reviewer` 行：
 
 ```sh
-dsh plugin --profile <name> add git+https://gitee.com/zuozewei/dsh-skill-7d-code-reviewer.git
+dsh plugin --profile <name> add git+https://github.com/7dgroup-ai/dsh-skill-7d-code-reviewer.git
 ```
 
-任何 pnpm 可识别的 git 地址均可；若本仓库镜像到 GitHub，`github:<owner>/dsh-skill-7d-code-reviewer` 简写等价。
+任何 pnpm 可识别的 git 地址均可；`github:7dgroup-ai/dsh-skill-7d-code-reviewer` 简写等价。
 
 pnpm 在得到显式允许前会拒绝运行 git 依赖的构建脚本，所以第一次 `add` 会失败。把 pnpm 打印的确切包键复制进该 profile 的 `pnpm-workspace.yaml`，然后重新执行：
 
 ```yaml
 allowBuilds:
-  '@7dgroup/dsh-skill-7d-code-reviewer@git+https://gitee.com/zuozewei/dsh-skill-7d-code-reviewer.git#<sha>': true
+  '@7dgroup/dsh-skill-7d-code-reviewer@git+https://github.com/7dgroup-ai/dsh-skill-7d-code-reviewer.git#<sha>': true
 ```
 
 允许构建意味着让该包的代码在安装时于你的机器上执行，且不在任何 agent 沙箱之内。建议锁定 commit（`...#<sha>`），让后续推送无法悄悄改变实际运行的内容。

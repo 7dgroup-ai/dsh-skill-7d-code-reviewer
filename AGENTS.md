@@ -2,7 +2,7 @@
 
 ## 仓库用途
 
-可安装的 dsh（DeepSeek Harness）组合层插件包 `@7dgroup/dsh-skill-7d-code-reviewer`。它向 `ctx.skills` 注册 `7d-code-reviewer` 技能提供者——即 7DGroup 模板驱动的代码审查技能：五步审查流程、严重/中等/轻微三级问题分级、四维度评分标准，以及占位符驱动的 HTML 报告模板。仓库托管在 Gitee，MIT 许可证，由 7DGroup 维护。
+可安装的 dsh（DeepSeek Harness）组合层插件包 `@7dgroup/dsh-skill-7d-code-reviewer`。它向 `ctx.skills` 注册 `7d-code-reviewer` 技能提供者——即 7DGroup 模板驱动的代码审查技能：五步审查流程、严重/中等/轻微三级问题分级、四维度评分标准，以及占位符驱动的 HTML 报告模板。仓库托管在 GitHub，MIT 许可证，由 7DGroup 维护。
 
 
 ## 插件效果
