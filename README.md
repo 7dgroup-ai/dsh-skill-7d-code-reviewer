@@ -80,7 +80,11 @@ Build the tarball locally with `pnpm build` followed by `pnpm pack --pack-destin
 
 Once installed, the skill registers itself under the name `7d-code-reviewer` and activates whenever you ask for a code review — for example:
 
-> Review this code: ...
+> /7d-code-reviewer Review this module: ...
+
+<p align="center">
+  <img src="screenshots/skills.png" alt="Invoking the 7d-code-reviewer skill for a code review" width="720">
+</p>
 
 It then produces:
 

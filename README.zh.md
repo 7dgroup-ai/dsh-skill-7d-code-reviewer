@@ -80,7 +80,11 @@ dsh plugin --profile <name> add ./7dgroup-dsh-skill-7d-code-reviewer-0.1.0-rc.5.
 
 安装后，技能以 `7d-code-reviewer` 名称注册，当你提出代码审查需求时自动生效，例如：
 
-> 审查这段代码：……
+> /7d-code-reviewer 审查这个模块：……
+
+<p align="center">
+  <img src="screenshots/skills.png" alt="调用 7d-code-reviewer 技能发起代码审查" width="720">
+</p>
 
 随后输出两份结果：
 
