@@ -1,4 +1,8 @@
 <p align="center">
+  <img src="screenshots/banner.png" alt="7DGroup code review skill plugin banner" width="800">
+</p>
+
+<p align="center">
   <img alt="npm version" src="https://img.shields.io/npm/v/@7dgroup/dsh-skill-7d-code-reviewer?style=flat-square&color=4b6fff">
   <img alt="license MIT" src="https://img.shields.io/badge/license-MIT-263146?style=flat-square">
   <img alt="node" src="https://img.shields.io/badge/node-%5E22.19%20%7C%7C%20%3E%3D24-339933?style=flat-square">
