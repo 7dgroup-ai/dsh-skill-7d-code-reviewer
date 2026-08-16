@@ -80,7 +80,7 @@ dsh plugin --profile <name> add @7dgroup/dsh-skill-7d-code-reviewer     # npm (o
 dsh plugin --profile <name> add ./7dgroup-dsh-skill-7d-code-reviewer-0.1.0-rc.5.tgz   # tarball from pnpm pack
 ```
 
-Build the tarball locally with `pnpm build` followed by `pnpm pack --pack-destination <dir>`; the archive carries `lib/`, `cordis.patch.yml`, `assets/` and the package metadata.
+A prebuilt tarball is also committed at the repository root (`7dgroup-dsh-skill-7d-code-reviewer-0.1.0-rc.5.tgz`) — download it and install directly, no build needed. To produce a fresh archive yourself, run `pnpm build` followed by `pnpm pack --pack-destination <dir>`; it carries `lib/`, `cordis.patch.yml`, `assets/` and the package metadata.
 
 ## 💡 Usage
 

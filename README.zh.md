@@ -80,7 +80,7 @@ dsh plugin --profile <name> add @7dgroup/dsh-skill-7d-code-reviewer     # npm（
 dsh plugin --profile <name> add ./7dgroup-dsh-skill-7d-code-reviewer-0.1.0-rc.5.tgz   # pnpm pack 产出的 tarball
 ```
 
-本地执行 `pnpm build` 后 `pnpm pack --pack-destination <目录>` 即可产出 tarball；产物内含 `lib/`、`cordis.patch.yml`、`assets/` 与包元信息。
+仓库根目录已附带预构建 tarball（`7dgroup-dsh-skill-7d-code-reviewer-0.1.0-rc.5.tgz`），直接下载即可安装，无需本地构建。如需自行产出新产物，执行 `pnpm build` 后 `pnpm pack --pack-destination <目录>`；产物内含 `lib/`、`cordis.patch.yml`、`assets/` 与包元信息。
 
 ## 💡 使用方式
 
