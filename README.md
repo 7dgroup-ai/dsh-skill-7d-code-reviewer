@@ -46,15 +46,19 @@ A sample HTML report generated from the pure-placeholder template (`templates/re
 
 Prerequisites: `dsh` CLI, Node `^22.19.0 || >=24.0.0`, pnpm 10+.
 
-### Install from GitHub (git)
+### Install directly in dsh (GitHub)
 
-`dsh plugin` appends the bundle to the profile's `dsh.profile.bundles`, and the bundle's own patch layer mounts the `skill-7d-code-reviewer` row over the base composition:
+Run one command directly in dsh — the `github:` shorthand is the fastest way:
+
+```sh
+dsh plugin --profile <name> add github:7dgroup-ai/dsh-skill-7d-code-reviewer
+```
+
+`dsh plugin` appends the bundle to the profile's `dsh.profile.bundles`, and the bundle's own patch layer mounts the `skill-7d-code-reviewer` row over the base composition. The full URL form is equivalent:
 
 ```sh
 dsh plugin --profile <name> add git+https://github.com/7dgroup-ai/dsh-skill-7d-code-reviewer.git
 ```
-
-Any git spec pnpm understands works; the `github:7dgroup-ai/dsh-skill-7d-code-reviewer` shorthand is equivalent.
 
 pnpm blocks a git dependency's build scripts until explicitly allowed, so the first `add` fails. Copy the exact package key pnpm printed into the profile's `pnpm-workspace.yaml`, then re-run:
 
@@ -62,6 +66,8 @@ pnpm blocks a git dependency's build scripts until explicitly allowed, so the fi
 allowBuilds:
   '@7dgroup/dsh-skill-7d-code-reviewer@git+https://github.com/7dgroup-ai/dsh-skill-7d-code-reviewer.git#<sha>': true
 ```
+
+(With the `github:` shorthand the key reads `@7dgroup/dsh-skill-7d-code-reviewer@github:7dgroup-ai/dsh-skill-7d-code-reviewer#<sha>` — always copy the exact key pnpm prints.)
 
 Allowing a build means letting that package's code run on your machine at install time, outside any agent sandbox. Prefer pinning a commit (`...#<sha>`) so later pushes cannot silently change what runs.
 

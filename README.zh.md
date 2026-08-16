@@ -46,15 +46,19 @@
 
 前置条件：`dsh` CLI、Node `^22.19.0 || >=24.0.0`、pnpm 10+。
 
-### 从 GitHub 安装（git）
+### 在 dsh 中直接安装（GitHub）
 
-`dsh plugin` 会把 bundle 追加进 profile 的 `dsh.profile.bundles`，本 bundle 自带的 patch 层在基础组合之上挂载 `skill-7d-code-reviewer` 行：
+一条命令直接安装，`github:` 简写是最快捷的方式：
+
+```sh
+dsh plugin --profile <name> add github:7dgroup-ai/dsh-skill-7d-code-reviewer
+```
+
+`dsh plugin` 会把 bundle 追加进 profile 的 `dsh.profile.bundles`，本 bundle 自带的 patch 层在基础组合之上挂载 `skill-7d-code-reviewer` 行。完整 URL 写法等价：
 
 ```sh
 dsh plugin --profile <name> add git+https://github.com/7dgroup-ai/dsh-skill-7d-code-reviewer.git
 ```
-
-任何 pnpm 可识别的 git 地址均可；`github:7dgroup-ai/dsh-skill-7d-code-reviewer` 简写等价。
 
 pnpm 在得到显式允许前会拒绝运行 git 依赖的构建脚本，所以第一次 `add` 会失败。把 pnpm 打印的确切包键复制进该 profile 的 `pnpm-workspace.yaml`，然后重新执行：
 
@@ -62,6 +66,8 @@ pnpm 在得到显式允许前会拒绝运行 git 依赖的构建脚本，所以�
 allowBuilds:
   '@7dgroup/dsh-skill-7d-code-reviewer@git+https://github.com/7dgroup-ai/dsh-skill-7d-code-reviewer.git#<sha>': true
 ```
+
+（使用 `github:` 简写时，授权键为 `@7dgroup/dsh-skill-7d-code-reviewer@github:7dgroup-ai/dsh-skill-7d-code-reviewer#<sha>` 形式；一律以 pnpm 打印的确切键为准。）
 
 允许构建意味着让该包的代码在安装时于你的机器上执行，且不在任何 agent 沙箱之内。建议锁定 commit（`...#<sha>`），让后续推送无法悄悄改变实际运行的内容。
 
