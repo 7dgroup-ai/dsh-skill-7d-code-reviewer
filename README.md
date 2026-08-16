@@ -25,6 +25,14 @@
 - **Dual output** — a text summary for quick reading, plus a full HTML report saved as `code-review-report-{timestamp}.html`.
 - **Built-in knowledge base** — coding standards, security checklist (SQL injection, XSS, authentication/authorization, sensitive-data leaks) and worked review examples, loaded on demand instead of bloating the prompt.
 
+## 📸 Preview
+
+A sample HTML report generated from the pure-placeholder template (`templates/report-template.html`) during a review of a small Python module — severity badges, four-dimension scores and fix suggestions are all filled by the model:
+
+<p align="center">
+  <img src="screenshots/report-preview.png" alt="Sample code review HTML report" width="720">
+</p>
+
 ## 🔍 The Review Flow
 
 | Step | What happens |
