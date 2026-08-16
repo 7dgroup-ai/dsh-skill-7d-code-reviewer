@@ -104,11 +104,11 @@ Prerequisites: `dsh` CLI, Node `^22.19.0 || >=24.0.0`, pnpm 10+.
 
 ### Install from within a dsh session (recommended)
 
-The most direct way — just ask the agent in any dsh conversation, and it runs the install for you:
+The most direct way — just ask the agent in any dsh conversation, and it runs the install for you. Use the GitHub spec — the npm name `@7dgroup/dsh-skill-7d-code-reviewer` only works after the package is published:
 
-> 安装插件 @7dgroup/dsh-skill-7d-code-reviewer
+> 安装插件 github:7dgroup-ai/dsh-skill-7d-code-reviewer
 
-(Or in English: "Install the plugin @7dgroup/dsh-skill-7d-code-reviewer" — the agent executes the equivalent `dsh plugin` command through its session shell.)
+(Or in English: "Install the plugin github:7dgroup-ai/dsh-skill-7d-code-reviewer" — the agent executes the equivalent `dsh plugin` command through its session shell.)
 
 For a git install the agent will hit the same pnpm `allowBuilds` gate and print the exact key to add to the profile's `pnpm-workspace.yaml`; after you add it, ask the agent to retry and the skill is enabled.
 

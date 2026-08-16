@@ -104,9 +104,9 @@ dsh-skill-7d-code-reviewer/
 
 ### 在 dsh 会话中安装（推荐）
 
-最直接的方式——在任意 dsh 会话中直接告诉助手，它会替你执行安装：
+最直接的方式——在任意 dsh 会话中直接告诉助手，它会替你执行安装。使用 GitHub 地址形式（npm 包名 `@7dgroup/dsh-skill-7d-code-reviewer` 需等发布到 npm 后才能使用）：
 
-> 安装插件 @7dgroup/dsh-skill-7d-code-reviewer
+> 安装插件 github:7dgroup-ai/dsh-skill-7d-code-reviewer
 
 助手会在会话内通过 Shell 执行对应的 `dsh plugin` 命令。git 安装时会遇到同样的 pnpm `allowBuilds` 门禁，助手会打印需要添加进 profile 的 `pnpm-workspace.yaml` 的确切授权键；添加后让助手重试即可完成安装。
 
