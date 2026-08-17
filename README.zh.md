@@ -179,6 +179,60 @@ dsh plugin --profile <name> add @7dgroup/dsh-skill-7d-code-reviewer
 
 以上两种形式携带预构建代码，无需 `allowBuilds` 授权。
 
+### 推荐配置——安装进 `web` profile
+
+大多数会话默认启动 `web` profile（`dsh web` 是 `dsh --profile web` 的简写），因此推荐直接把技能装进 `web`，无需新建 profile：
+
+**第 0 步——确保 pnpm 可用。** `dsh plugin` 会在 profile 目录内转发给 pnpm，所以 pnpm 必须先安装并在 PATH 上：
+
+```sh
+corepack prepare pnpm@latest --activate   # 或：npm install -g pnpm@10
+```
+
+**第 1 步——安装 tarball（免构建授权）。** 预构建 tarball 携带可直接运行的代码，不会触发 pnpm 的 `allowBuilds` 门禁：
+
+```sh
+dsh plugin --profile web add ./7dgroup-dsh-skill-7d-code-reviewer-0.1.0-rc.5.tgz
+```
+
+想跟随 git 最新版？使用 `github:` 简写并**锁定 commit**，然后授权构建：
+
+```sh
+dsh plugin --profile web add github:7dgroup-ai/dsh-skill-7d-code-reviewer#<sha>
+```
+
+第一次 `add` 会失败；把 pnpm 打印的确切键复制进 `~/.dsh/profiles/web/pnpm-workspace.yaml`：
+
+```yaml
+allowBuilds:
+  '@7dgroup/dsh-skill-7d-code-reviewer@github:7dgroup-ai/dsh-skill-7d-code-reviewer#<sha>': true
+```
+
+**安装完成后的状态。** profile 清单 `~/.dsh/profiles/web/package.json` 会新增依赖与 bundle 行：
+
+```json
+{
+  "name": "dsh-profile-web",
+  "private": true,
+  "dependencies": {
+    "@7dgroup/dsh-skill-7d-code-reviewer": "<版本>"
+  },
+  "dsh": {
+    "profile": {
+      "bundles": [
+        "@deepseek-ai/dsh-base",
+        "@deepseek-ai/dsh-web-app",
+        "@7dgroup/dsh-skill-7d-code-reviewer"
+      ]
+    }
+  }
+}
+```
+
+其余文件无需改动——`cordis.patch.yml` 保持 `[]`，因为 bundle 自带的 patch 层会自动挂载 `skill-7d-code-reviewer` 行。用 `dsh --profile web --dump-config` 验证挂载，重启会话（bundle 变更在下次启动时生效），然后执行 `/7d-code-reviewer`。
+
+**用的是其他 profile？** 把上面的 `web` 换成你实际启动的名字（`dsh --profile <name>`）；技能只在被安装进的 profile 中生效。
+
 ### 构建与测试
 
 ```sh
@@ -273,6 +327,12 @@ pnpm test    # vitest
 
 **问：可以不授权构建直接安装吗？**
 答：可以——使用仓库根目录的预构建 tarball，或发布后的 npm 包，两者都不需要 `allowBuilds`。
+
+**问：应该装进哪个 profile？**
+答：装进你实际启动的那个——dsh 每次运行都必带 `--profile <name>`，技能只在被安装进的 profile 中生效。大多数会话启动 `web`（`dsh web`），所以 `dsh plugin --profile web add ...` 是最常见的命令。
+
+**问：`dsh plugin` 报 "pnpm not found"？**
+答：`dsh plugin` 会在 profile 目录内转发给 pnpm——先安装 pnpm 并加入 PATH（`corepack prepare pnpm@latest --activate` 或 `npm install -g pnpm@10`），然后重试。
 
 ## 📄 许可证
 

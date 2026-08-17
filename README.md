@@ -181,6 +181,60 @@ dsh plugin --profile <name> add @7dgroup/dsh-skill-7d-code-reviewer
 
 Both forms ship prebuilt code and need no `allowBuilds` allowance.
 
+### Recommended setup — install into the `web` profile
+
+Most sessions boot the default `web` profile (`dsh web` is a shorthand for `dsh --profile web`), so the recommended path is to install the skill there — no new profile needed:
+
+**Step 0 — pnpm on PATH.** `dsh plugin` forwards to pnpm in the profile directory, so pnpm must be installed and on PATH:
+
+```sh
+corepack prepare pnpm@latest --activate   # or: npm install -g pnpm@10
+```
+
+**Step 1 — install the tarball (no build approval).** The prebuilt tarball ships ready-to-run code, so the pnpm `allowBuilds` gate never triggers:
+
+```sh
+dsh plugin --profile web add ./7dgroup-dsh-skill-7d-code-reviewer-0.1.0-rc.5.tgz
+```
+
+Prefer following git HEAD instead? Use the `github:` shorthand **with a pinned commit**, then allow the build:
+
+```sh
+dsh plugin --profile web add github:7dgroup-ai/dsh-skill-7d-code-reviewer#<sha>
+```
+
+The first `add` fails; copy the exact key pnpm prints into `~/.dsh/profiles/web/pnpm-workspace.yaml`:
+
+```yaml
+allowBuilds:
+  '@7dgroup/dsh-skill-7d-code-reviewer@github:7dgroup-ai/dsh-skill-7d-code-reviewer#<sha>': true
+```
+
+**After install.** The profile manifest `~/.dsh/profiles/web/package.json` gains the dependency and the bundle row:
+
+```json
+{
+  "name": "dsh-profile-web",
+  "private": true,
+  "dependencies": {
+    "@7dgroup/dsh-skill-7d-code-reviewer": "<version>"
+  },
+  "dsh": {
+    "profile": {
+      "bundles": [
+        "@deepseek-ai/dsh-base",
+        "@deepseek-ai/dsh-web-app",
+        "@7dgroup/dsh-skill-7d-code-reviewer"
+      ]
+    }
+  }
+}
+```
+
+Nothing else needs editing — `cordis.patch.yml` stays `[]`, because the bundle's own patch layer mounts the `skill-7d-code-reviewer` row automatically. Verify the mount with `dsh --profile web --dump-config`, restart the session (bundle changes apply on the next boot), then run `/7d-code-reviewer`.
+
+**Using a different profile?** Replace `web` with the name you boot (`dsh --profile <name>`); the skill only activates in the profile it is installed into.
+
 ### Build and test
 
 ```sh
@@ -275,6 +329,12 @@ A: Run `dsh plugin --profile <name> remove @7dgroup/dsh-skill-7d-code-reviewer` 
 
 **Q: Can I install without approving builds?**
 A: Yes — use the prebuilt tarball (committed at the repository root) or the npm package (once published); neither needs `allowBuilds`.
+
+**Q: Which profile should I install into?**
+A: The one you boot — `dsh --profile <name>` is required on every run, and the skill only activates in the profile it is installed into. Most sessions boot `web` (`dsh web`), so `dsh plugin --profile web add ...` is the typical command.
+
+**Q: `dsh plugin` fails with "pnpm not found"?**
+A: `dsh plugin` forwards to pnpm in the profile directory — install pnpm and put it on PATH (`corepack prepare pnpm@latest --activate` or `npm install -g pnpm@10`), then re-run.
 
 ## 📄 License
 
