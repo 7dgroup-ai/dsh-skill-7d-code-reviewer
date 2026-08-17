@@ -191,23 +191,25 @@ Most sessions boot the default `web` profile (`dsh web` is a shorthand for `dsh 
 corepack prepare pnpm@latest --activate   # or: npm install -g pnpm@10
 ```
 
-**Step 1 — install the tarball (no build approval).** The prebuilt tarball ships ready-to-run code, so the pnpm `allowBuilds` gate never triggers:
+**Step 1 — install via the `github:` shorthand.** A git install runs the package's `prepare` build, which pnpm blocks until explicitly allowed — so the first `add` fails:
 
 ```sh
-dsh plugin --profile web add ./7dgroup-dsh-skill-7d-code-reviewer-0.1.0-rc.5.tgz
+dsh plugin --profile web add github:7dgroup-ai/dsh-skill-7d-code-reviewer
 ```
 
-Prefer following git HEAD instead? Use the `github:` shorthand **with a pinned commit**, then allow the build:
-
-```sh
-dsh plugin --profile web add github:7dgroup-ai/dsh-skill-7d-code-reviewer#<sha>
-```
-
-The first `add` fails; copy the exact key pnpm prints into `~/.dsh/profiles/web/pnpm-workspace.yaml`:
+Copy the exact key pnpm prints into `~/.dsh/profiles/web/pnpm-workspace.yaml`:
 
 ```yaml
 allowBuilds:
   '@7dgroup/dsh-skill-7d-code-reviewer@github:7dgroup-ai/dsh-skill-7d-code-reviewer#<sha>': true
+```
+
+then re-run the same command. Prefer **pinning a commit** — append `#<sha>` to the spec (`github:7dgroup-ai/dsh-skill-7d-code-reviewer#<sha>`) so later pushes cannot silently change what runs.
+
+**Prefer no build approval?** Install the prebuilt tarball instead — it ships ready-to-run code and never hits the `allowBuilds` gate:
+
+```sh
+dsh plugin --profile web add ./7dgroup-dsh-skill-7d-code-reviewer-0.1.0-rc.5.tgz
 ```
 
 **After install.** The profile manifest `~/.dsh/profiles/web/package.json` gains the dependency and the bundle row:

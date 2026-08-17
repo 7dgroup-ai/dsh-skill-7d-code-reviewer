@@ -189,23 +189,25 @@ dsh plugin --profile <name> add @7dgroup/dsh-skill-7d-code-reviewer
 corepack prepare pnpm@latest --activate   # 或：npm install -g pnpm@10
 ```
 
-**第 1 步——安装 tarball（免构建授权）。** 预构建 tarball 携带可直接运行的代码，不会触发 pnpm 的 `allowBuilds` 门禁：
+**第 1 步——使用 `github:` 简写安装。** git 安装会运行包的 `prepare` 构建，pnpm 在得到显式允许前会拒绝——所以第一次 `add` 会失败：
 
 ```sh
-dsh plugin --profile web add ./7dgroup-dsh-skill-7d-code-reviewer-0.1.0-rc.5.tgz
+dsh plugin --profile web add github:7dgroup-ai/dsh-skill-7d-code-reviewer
 ```
 
-想跟随 git 最新版？使用 `github:` 简写并**锁定 commit**，然后授权构建：
-
-```sh
-dsh plugin --profile web add github:7dgroup-ai/dsh-skill-7d-code-reviewer#<sha>
-```
-
-第一次 `add` 会失败；把 pnpm 打印的确切键复制进 `~/.dsh/profiles/web/pnpm-workspace.yaml`：
+把 pnpm 打印的确切键复制进 `~/.dsh/profiles/web/pnpm-workspace.yaml`：
 
 ```yaml
 allowBuilds:
   '@7dgroup/dsh-skill-7d-code-reviewer@github:7dgroup-ai/dsh-skill-7d-code-reviewer#<sha>': true
+```
+
+然后重新执行同一条命令。建议**锁定 commit**——在地址后追加 `#<sha>`（`github:7dgroup-ai/dsh-skill-7d-code-reviewer#<sha>`），让后续推送无法悄悄改变实际运行的内容。
+
+**不想授权构建？** 改用预构建 tarball——携带可直接运行的代码，不会触发 `allowBuilds` 门禁：
+
+```sh
+dsh plugin --profile web add ./7dgroup-dsh-skill-7d-code-reviewer-0.1.0-rc.5.tgz
 ```
 
 **安装完成后的状态。** profile 清单 `~/.dsh/profiles/web/package.json` 会新增依赖与 bundle 行：
