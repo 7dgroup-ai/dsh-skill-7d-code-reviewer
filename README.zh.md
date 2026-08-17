@@ -112,7 +112,7 @@ dsh-skill-7d-code-reviewer/
 
 > 安装插件 github:7dgroup-ai/dsh-skill-7d-code-reviewer
 
-助手会在会话内通过 Shell 执行对应的 `dsh plugin` 命令。git 安装时会遇到同样的 pnpm `allowBuilds` 门禁，助手会打印需要添加进 profile 的 `pnpm-workspace.yaml` 的确切授权键；添加后让助手重试即可完成安装。
+助手会在会话内通过 Shell 执行对应的 `dsh plugin` 命令。git 安装时会遇到同样的 pnpm `allowBuilds` 门禁，助手会打印需要添加进 profile 的 pnpm 设置文件（`~/.dsh/profiles/<name>/pnpm-workspace.yaml`）的确切授权键；添加后让助手重试即可完成安装。
 
 ### 在 dsh 中直接安装（CLI）
 
@@ -122,6 +122,8 @@ dsh-skill-7d-code-reviewer/
 dsh plugin --profile <name> add github:7dgroup-ai/dsh-skill-7d-code-reviewer
 ```
 
+`<name>` 是你要用 `dsh --profile <name>` 启动的 profile；profile 是什么、如何取名、文件放在哪里，见下文「什么是 dsh profile？」。
+
 完整 URL 写法等价：
 
 ```sh
@@ -130,7 +132,7 @@ dsh plugin --profile <name> add git+https://github.com/7dgroup-ai/dsh-skill-7d-c
 
 `dsh plugin` 会把 bundle 追加进 profile 的 `dsh.profile.bundles`，本 bundle 自带的 patch 层在基础组合之上挂载 `skill-7d-code-reviewer` 行。
 
-pnpm 在得到显式允许前会拒绝运行 git 依赖的构建脚本，所以第一次 `add` 会失败。把 pnpm 打印的确切包键复制进该 profile 的 `pnpm-workspace.yaml`，然后重新执行：
+pnpm 在得到显式允许前会拒绝运行 git 依赖的构建脚本，所以第一次 `add` 会失败。把 pnpm 打印的确切包键复制进该 profile 的 pnpm 设置文件——`~/.dsh/profiles/<name>/pnpm-workspace.yaml`——然后重新执行：
 
 ```yaml
 allowBuilds:
@@ -140,6 +142,26 @@ allowBuilds:
 （使用 `github:` 简写时，授权键为 `@7dgroup/dsh-skill-7d-code-reviewer@github:7dgroup-ai/dsh-skill-7d-code-reviewer#<sha>` 形式；一律以 pnpm 打印的确切键为准。）
 
 允许构建意味着让该包的代码在安装时于你的机器上执行，且不在任何 agent 沙箱之内。建议锁定 commit（`...#<sha>`），让后续推送无法悄悄改变实际运行的内容。
+
+### 什么是 dsh profile？
+
+每次运行 dsh 都会启动一个 **profile**——一个命名环境，其配置存放在 harness 主目录下的 `~/.dsh/profiles/<name>`（若设置了 `DSH_HOME` 环境变量则为 `$DSH_HOME/profiles/<name>`）。一个 profile 目录包含：
+
+| 文件 | 作用 |
+|---|---|
+| `package.json` | profile 清单：`dsh.profile.bundles` 列出按顺序挂载的插件 bundle；`dependencies` 存放树外插件 |
+| `cordis.patch.yml` | 你自己的补丁层，在所有 bundle 层之后应用 |
+| `pnpm-workspace.yaml` | profile 的 pnpm 设置；`allowBuilds` 授权键写在这里 |
+| `node_modules` | pnpm 管理的插件依赖 |
+
+dsh **没有默认 profile**——每次运行都必须带 `--profile <name>`（`dsh web` 是 `dsh --profile web` 的简写）。内置的 `web` 与 `headless` profile 会在首次启动时自动初始化；其他名字则在你第一次执行 `dsh plugin --profile <name> ...` 命令时自动创建，并打印创建位置：
+
+```sh
+dsh plugin --profile tui add github:7dgroup-ai/dsh-skill-7d-code-reviewer
+# dsh: initialized profile tui at ~/.dsh/profiles/tui
+```
+
+查看已有 profile：列出 `~/.dsh/profiles/` 目录，每个子目录就是一个 profile 名。自定义名字必须先这样创建才能启动——对未知的自定义名字执行 `dsh --profile <name>` 会失败，并提示 `create it with 'dsh plugin --profile <name> add <package>'`。
 
 ### 从 tarball 安装（免构建授权）
 
@@ -247,7 +269,7 @@ pnpm test    # vitest
 答：在地址后追加 `#<sha>`，如 `git+https://github.com/7dgroup-ai/dsh-skill-7d-code-reviewer.git#<sha>`——后续推送无法悄悄改变实际运行的内容。
 
 **问：如何卸载？**
-答：从 profile 的 `dsh.profile.bundles` 中移除该 bundle 行即可，不会留下任何核心补丁。
+答：执行 `dsh plugin --profile <name> remove @7dgroup/dsh-skill-7d-code-reviewer`（pnpm 移除依赖并自动对账掉 bundle 行），或手动编辑该 profile 的 `package.json`，从 `dsh.profile.bundles` 中移除对应行。不会留下任何核心补丁。
 
 **问：可以不授权构建直接安装吗？**
 答：可以——使用仓库根目录的预构建 tarball，或发布后的 npm 包，两者都不需要 `allowBuilds`。

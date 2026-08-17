@@ -114,7 +114,7 @@ The most direct way — just ask the agent in any dsh conversation, and it runs 
 
 (Or in English: "Install the plugin github:7dgroup-ai/dsh-skill-7d-code-reviewer" — the agent executes the equivalent `dsh plugin` command through its session shell.)
 
-For a git install the agent will hit the same pnpm `allowBuilds` gate and print the exact key to add to the profile's `pnpm-workspace.yaml`; after you add it, ask the agent to retry and the skill is enabled.
+For a git install the agent will hit the same pnpm `allowBuilds` gate and print the exact key to add to the profile's pnpm settings file (`~/.dsh/profiles/<name>/pnpm-workspace.yaml`); after you add it, ask the agent to retry and the skill is enabled.
 
 ### Install directly in dsh (CLI)
 
@@ -124,6 +124,8 @@ Run one command directly in dsh — the `github:` shorthand is the fastest way:
 dsh plugin --profile <name> add github:7dgroup-ai/dsh-skill-7d-code-reviewer
 ```
 
+`<name>` is the profile you boot with `dsh --profile <name>` — see [What is a dsh profile?](#what-is-a-dsh-profile) below for how profiles work, how to pick a name and where the profile files live.
+
 The full URL form is equivalent:
 
 ```sh
@@ -132,7 +134,7 @@ dsh plugin --profile <name> add git+https://github.com/7dgroup-ai/dsh-skill-7d-c
 
 `dsh plugin` appends the bundle to the profile's `dsh.profile.bundles`, and the bundle's own patch layer mounts the `skill-7d-code-reviewer` row over the base composition.
 
-pnpm blocks a git dependency's build scripts until explicitly allowed, so the first `add` fails. Copy the exact package key pnpm printed into the profile's `pnpm-workspace.yaml`, then re-run:
+pnpm blocks a git dependency's build scripts until explicitly allowed, so the first `add` fails. Copy the exact package key pnpm printed into the profile's pnpm settings file — `~/.dsh/profiles/<name>/pnpm-workspace.yaml` — then re-run:
 
 ```yaml
 allowBuilds:
@@ -142,6 +144,26 @@ allowBuilds:
 (With the `github:` shorthand the key reads `@7dgroup/dsh-skill-7d-code-reviewer@github:7dgroup-ai/dsh-skill-7d-code-reviewer#<sha>` — always copy the exact key pnpm prints.)
 
 Allowing a build means letting that package's code run on your machine at install time, outside any agent sandbox. Prefer pinning a commit (`...#<sha>`) so later pushes cannot silently change what runs.
+
+### What is a dsh profile?
+
+Every dsh run boots a **profile** — a named environment whose configuration lives under the harness home in `~/.dsh/profiles/<name>` (or `$DSH_HOME/profiles/<name>` if the `DSH_HOME` env var is set). A profile directory holds:
+
+| File | Purpose |
+|---|---|
+| `package.json` | Profile manifest: `dsh.profile.bundles` lists the ordered plugin bundles to mount; `dependencies` holds out-of-tree plugins |
+| `cordis.patch.yml` | Your own patch layer, applied after every bundle layer |
+| `pnpm-workspace.yaml` | pnpm settings for the profile; the `allowBuilds` key goes here |
+| `node_modules` | pnpm-managed plugin dependencies |
+
+There is **no default profile** — `dsh --profile <name>` is required on every run (`dsh web` is a shorthand for `dsh --profile web`). The shipped `web` and `headless` profiles auto-initialize on first boot; any other name is created automatically the first time you run a `dsh plugin --profile <name> ...` command, which reports where it was created:
+
+```sh
+dsh plugin --profile tui add github:7dgroup-ai/dsh-skill-7d-code-reviewer
+# dsh: initialized profile tui at ~/.dsh/profiles/tui
+```
+
+To see which profiles already exist, list `~/.dsh/profiles/` — each subdirectory is one profile name. A custom name must be created this way before it can boot: `dsh --profile <name>` on an unknown custom name fails with the hint `create it with 'dsh plugin --profile <name> add <package>'`.
 
 ### Install from tarball (no build approval)
 
@@ -249,7 +271,7 @@ A: pnpm refuses to run build scripts of git dependencies until explicitly allowe
 A: Append `#<sha>` to the spec, e.g. `git+https://github.com/7dgroup-ai/dsh-skill-7d-code-reviewer.git#<sha>` — later pushes cannot silently change what runs.
 
 **Q: How do I uninstall?**
-A: Remove the bundle row from the profile's `dsh.profile.bundles`; no core patches are left behind.
+A: Run `dsh plugin --profile <name> remove @7dgroup/dsh-skill-7d-code-reviewer` (pnpm removes the dependency and the bundle row is reconciled away), or edit the profile's `package.json` and remove the row from `dsh.profile.bundles`. No core patches are left behind.
 
 **Q: Can I install without approving builds?**
 A: Yes — use the prebuilt tarball (committed at the repository root) or the npm package (once published); neither needs `allowBuilds`.
