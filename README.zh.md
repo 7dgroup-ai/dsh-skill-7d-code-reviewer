@@ -26,8 +26,9 @@
 | 项目 | 值 |
 |---|---|
 | 作者 | 7DGroup |
-| 版本 | 0.1.0-rc.5 |
+| 版本 | 0.1.0 |
 | 运行环境 | Node `^22.19.0 || >=24.0.0` · pnpm 10+ · dsh CLI |
+| 支持的 dsh 版本 | 0.2.0-rc.2+（0.2.x） |
 | Peer 依赖 | `@deepseek-ai/cordis` · `@deepseek-ai/dsh-skill` · `@deepseek-ai/dsh-invariants` |
 | 技能名称 | `7d-code-reviewer` |
 | 仓库地址 | [github.com/7dgroup-ai/dsh-skill-7d-code-reviewer](https://github.com/7dgroup-ai/dsh-skill-7d-code-reviewer) |
@@ -98,7 +99,7 @@ dsh-skill-7d-code-reviewer/
 │   └── report-preview.png              # HTML 报告示例
 ├── cordis.patch.yml                    # 组合层补丁
 ├── tsdown.config.ts                    # 构建配置（仅转译）
-├── 7dgroup-dsh-skill-7d-code-reviewer-0.1.0-rc.5.tgz   # 预构建 tarball
+├── 7dgroup-dsh-skill-7d-code-reviewer-0.1.0.tgz   # 预构建 tarball
 ├── package.json
 └── README.md
 ```
@@ -169,7 +170,7 @@ dsh plugin --profile tui add github:7dgroup-ai/dsh-skill-7d-code-reviewer
 仓库根目录已附带预构建 tarball——直接下载即可安装：
 
 ```sh
-dsh plugin --profile <name> add ./7dgroup-dsh-skill-7d-code-reviewer-0.1.0-rc.5.tgz
+dsh plugin --profile <name> add ./7dgroup-dsh-skill-7d-code-reviewer-0.1.0.tgz
 ```
 
 或者发布到 npm 后：
@@ -208,7 +209,7 @@ allowBuilds:
 **不想授权构建？** 改用预构建 tarball——携带可直接运行的代码，不会触发 `allowBuilds` 门禁：
 
 ```sh
-dsh plugin --profile web add ./7dgroup-dsh-skill-7d-code-reviewer-0.1.0-rc.5.tgz
+dsh plugin --profile web add ./7dgroup-dsh-skill-7d-code-reviewer-0.1.0.tgz
 ```
 
 **安装完成后的状态。** profile 清单 `~/.dsh/profiles/web/package.json` 会新增依赖与 bundle 行：

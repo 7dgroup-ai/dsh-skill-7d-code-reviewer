@@ -26,8 +26,9 @@ A professional, template-driven code review skill plugin for DeepSeek Harness (D
 | Field | Value |
 |---|---|
 | Author | 7DGroup |
-| Version | 0.1.0-rc.5 |
+| Version | 0.1.0 |
 | Runtime | Node `^22.19.0 || >=24.0.0` · pnpm 10+ · dsh CLI |
+| Supported dsh versions | 0.2.0-rc.2+ (0.2.x) |
 | Peer dependencies | `@deepseek-ai/cordis` · `@deepseek-ai/dsh-skill` · `@deepseek-ai/dsh-invariants` |
 | Skill name | `7d-code-reviewer` |
 | Repository | [github.com/7dgroup-ai/dsh-skill-7d-code-reviewer](https://github.com/7dgroup-ai/dsh-skill-7d-code-reviewer) |
@@ -98,7 +99,7 @@ dsh-skill-7d-code-reviewer/
 │   └── report-preview.png              # sample HTML report
 ├── cordis.patch.yml                    # composition patch layer
 ├── tsdown.config.ts                    # build config (transpile-only)
-├── 7dgroup-dsh-skill-7d-code-reviewer-0.1.0-rc.5.tgz   # prebuilt tarball
+├── 7dgroup-dsh-skill-7d-code-reviewer-0.1.0.tgz   # prebuilt tarball
 ├── package.json
 └── README.md
 ```
@@ -171,7 +172,7 @@ To see which profiles already exist, list `~/.dsh/profiles/` — each subdirecto
 A prebuilt tarball is committed at the repository root — download it and install directly:
 
 ```sh
-dsh plugin --profile <name> add ./7dgroup-dsh-skill-7d-code-reviewer-0.1.0-rc.5.tgz
+dsh plugin --profile <name> add ./7dgroup-dsh-skill-7d-code-reviewer-0.1.0.tgz
 ```
 
 Or once published on npm:
@@ -210,7 +211,7 @@ then re-run the same command. Prefer **pinning a commit** — append `#<sha>` to
 **Prefer no build approval?** Install the prebuilt tarball instead — it ships ready-to-run code and never hits the `allowBuilds` gate:
 
 ```sh
-dsh plugin --profile web add ./7dgroup-dsh-skill-7d-code-reviewer-0.1.0-rc.5.tgz
+dsh plugin --profile web add ./7dgroup-dsh-skill-7d-code-reviewer-0.1.0.tgz
 ```
 
 **After install.** The profile manifest `~/.dsh/profiles/web/package.json` gains the dependency and the bundle row:
