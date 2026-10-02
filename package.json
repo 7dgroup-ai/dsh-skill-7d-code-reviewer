@@ -1,7 +1,7 @@
 {
   "name": "@7dgroup/dsh-skill-7d-code-reviewer",
   "description": "Installable composition bundle contributing the 7DGroup template-driven code review skill to DeepSeek Harness",
-  "version": "0.1.0-rc.5",
+  "version": "0.1.0",
   "publishConfig": {
     "access": "public"
   },
@@ -48,13 +48,13 @@
   },
   "peerDependencies": {
     "@deepseek-ai/cordis": "^4.0.1",
-    "@deepseek-ai/dsh-invariants": "^0.1.0-rc.5",
-    "@deepseek-ai/dsh-skill": "^0.1.0-rc.5"
+    "@deepseek-ai/dsh-invariants": "^0.2.0-rc.2",
+    "@deepseek-ai/dsh-skill": "^0.2.0-rc.2"
   },
   "devDependencies": {
     "@deepseek-ai/cordis": "^4.0.1",
-    "@deepseek-ai/dsh-invariants": "^0.1.0-rc.5",
-    "@deepseek-ai/dsh-skill": "^0.1.0-rc.5",
+    "@deepseek-ai/dsh-invariants": "^0.2.0-rc.2",
+    "@deepseek-ai/dsh-skill": "^0.2.0-rc.2",
     "@types/node": "^22.20.0",
     "tsdown": "^0.22.2",
     "vitest": "^4.1.8"
